@@ -31,7 +31,6 @@ insert into marcas (descripcion) values
 ('Pantene'),
 ('Ensure'),
 ('Geriaplus'),
-('Geriaplus'),
 ('Yaqua'),
 ('Electrolight'),
 ('BioDerma'),
@@ -121,7 +120,7 @@ insert into usuarios(nombreusuario, correo, clave) values
 ('karolinaCD', 'karoCD@gmail', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5')
 select idusuario, nombreusuario, correo, clave, restablecer, estado from usuarios
 
-update usuarios set estado = 0 where idusuario = 2
+update usuarios set estado = 0 where idusuario = 1
 
 
 --datos de ubigeo

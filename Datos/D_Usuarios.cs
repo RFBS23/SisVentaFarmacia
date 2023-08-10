@@ -118,7 +118,7 @@ namespace Datos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cndb))
                 {
-                    SqlCommand cmd = new SqlCommand("delete top (1) from usuario where idusuario = @id", oconexion);
+                    SqlCommand cmd = new SqlCommand("delete top (1) from usuarios where idusuario = @id", oconexion);
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();

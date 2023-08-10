@@ -116,11 +116,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-bg-success rounded-2" id="btnmodalLabel">&nbsp; Crear Nuevo Usuario <i class="fas fa-users me-1"></i> &nbsp;</h1>
+                <h1 class="modal-title fs-5 text-bg-success rounded-2" id="btnmodalLabel">&nbsp; Usuarios <i class="fas fa-users me-1"></i> &nbsp;</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input id="userid" type="text" value="0" />
+                <input id="userid" type="hidden" value="0" />
                 <form class="row g-2" autocomplete="off">
                     <div class="col-md-6">
                         <label for="nombreuser" class="form-label">Nombre Usuario</label>
@@ -150,7 +150,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-primary" type="button" onclick="guardar()">Registrar Usuario &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
+                <button class="btn btn-primary" type="button" onclick="guardar()">Guardar Datos &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
             </div>
         </div>
     </div>
@@ -158,9 +158,6 @@
 <!--fin modal-->
 
 @section scripts {
-    <!--sweetAlert-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
         var tabladata;
         var filaseleccionada;
@@ -200,7 +197,7 @@
 
         //abrir modal
         function btnabrirmodal(json) {
-        
+
             $("#userid").val(0);
             $("#nombreuser").val("");
             $("#txtcorreo").val("");
@@ -228,6 +225,45 @@
             btnabrirmodal(data)
         })
 
+        //eliminar
+        $("#tabla tbody").on("click", '.btn-eliminar', function () {
+            var usuarioseleccionado = $(this).closest("tr");
+            var data = tabladata.row(usuarioseleccionado).data();
+
+            swal({
+                title: "¿Estas Seguro(a)?",
+                text: "Desea Eliminar el Usuario 🤔?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Si, Deseo Eliminar 👨‍💻",
+                cancelButtonText: "No, Cancelar 😅!",
+                closeOnConfirm: false
+            },
+                function () {
+                    jQuery.ajax({
+                        url: '@Url.Action("EliminarUsuarios", "Home")',
+                        type: "POST",
+                        data: JSON.stringify({ id: data.idusuario }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            if (data.resultado) {
+                                tabladata.row(usuarioseleccionado).remove().draw();
+                                swal("Eliminado!!", "El Usuario Fue Eliminado Correctamente", "success");
+                            } else {
+                                swal("Cancelado", "Se ha cancelado la Operacion", "error");
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        }
+                    });
+                });
+
+            console.log(data);
+        })
+
         //btn guardar
         function guardar() {
             var Usuario = {
@@ -245,7 +281,7 @@
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    debugger;
+                    $(".modal-body").LoadingOverlay("hide");
                     //usuario nuevo
                     if (Usuario.idusuario == 0) {
                         if (data.resultado != 0) {
@@ -256,7 +292,7 @@
                             $("#mensajeError").text(data.mensaje);
                             $("#mensajeError").show();
                         }
-                      
+
                     } else {
                         if (data.resultado) {
                             tabladata.row(filaseleccionada).data(Usuario).draw(false);
@@ -266,19 +302,24 @@
                             $("#mensajeError").text(data.mensaje);
                             $("#mensajeError").show();
                         }
-                        
+
                     }
                 },
                 error: function (error) {
-                    console.log(error)
+                    $(".modal-body").LoadingOverlay("hide");
+                    $("#mensajeError").text("Error al Guardar los datos");
+                    $("#mensajeError").show();
                 },
                 beforeSend: function () {
-
-                },
+                    $(".modal-body").LoadingOverlay("show", {
+                        imageResezeFactor: 2,
+                        image: "",
+                        fontawesome: "fas fa-spinner",
+                        text: "Cargando ...",
+                        size: 14
+                    })
+                }
             });
-
-            //$("#abrirmodal").modal("hide");
-
         }
     </script>
 }
