@@ -1,0 +1,9 @@
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\bin\Debug\Datos.dll
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\bin\Debug\Datos.pdb
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\bin\Debug\Entidad.dll
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\bin\Debug\Entidad.pdb
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\obj\Debug\Datos.csproj.AssemblyReference.cache
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\obj\Debug\Datos.csproj.CopyComplete
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\obj\Debug\Datos.dll
+C:\Users\fabri\Documents\Practicas-LP\C-Sharp\SistemaFarmacia\Datos\obj\Debug\Datos.pdb
