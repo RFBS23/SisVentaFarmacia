@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sistema Farmacia</title>
+    <link rel="shortcut icon" href="~/images/icono.png">
+    @Styles.Render("~/Content/css")
+    @*Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html">
+            <!--FAMISALUD-->
+            <img class="img-logo" src="~/images/logo.png" style="width: 140px;">
+        </a>
+
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>-->
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-light small">Douglas McGee</span>
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm"></i>
+                            &nbsp;
+                            Perfil
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#!">
+                            <i class="fas fa-cogs fa-sm"></i>
+                            &nbsp;
+                            Configuracion
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user-lock fa-sm"></i>
+                            &nbsp;
+                            Restablecer Contraseña
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-sign-out-alt fa-sm"></i>
+                            &nbsp;
+                            Cerrar Sesion
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Resumen</div>
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
+                            Usuarios
+                        </a>
+                        
+                        <div class="sb-sidenav-menu-heading">Mantenimientos</div>
+                        <a class="nav-link" href="@Url.Action("Categorias", "Mantenimiento")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-grip-horizontal"></i></div>
+                            Categorias
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Marcas", "Mantenimiento")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
+                            Marcas
+                        </a>
+                        <a class="nav-link" href="@Url.Action("Productos", "Mantenimiento")">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                            Productos
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sb-sidenav-footer">
+                    <div class="small">Conectado como:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <main>
+                <!--comiendo -->
+                <div class="container-fluid px-4">
+                    @RenderBody()
+                </div>
+                <!--fin comienzo-->
+            </main>
+
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Clinica Famisalud 2023</div>
+                        <div>
+                            <a href="https://www.famisalud.com.pe/web/index.php?view=politica-privacidad" class="btn btn-outline-primary btn-sm" target="_blank">Politica y Privacidad</a>
+                            &middot;
+                            <a href="https://www.famisalud.com.pe/web/index.php?view=terminos-condiciones" class="btn btn-outline-primary btn-sm" target="_blank">Terminos &amp; Condiciones</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/complementos")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

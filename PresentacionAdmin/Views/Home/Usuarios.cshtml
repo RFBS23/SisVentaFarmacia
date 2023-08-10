@@ -1,0 +1,284 @@
+﻿
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .breadcrumb-chevron {
+        --bs-breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236c757d'%3E%3Cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+        gap: .5rem;
+    }
+
+        .breadcrumb-chevron .breadcrumb-item {
+            display: flex;
+            gap: inherit;
+            align-items: center;
+            padding-left: 0;
+            line-height: 1;
+        }
+
+            .breadcrumb-chevron .breadcrumb-item::before {
+                gap: inherit;
+                float: none;
+                width: 1rem;
+                height: 1rem;
+            }
+
+    .breadcrumb-custom .breadcrumb-item {
+        position: relative;
+        flex-grow: 1;
+        padding: .75rem 3rem;
+    }
+
+        .breadcrumb-custom .breadcrumb-item::before {
+            display: none;
+        }
+
+        .breadcrumb-custom .breadcrumb-item::after {
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            z-index: 1;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin-top: -25px;
+            content: "";
+            background-color: var(--bs-tertiary-bg);
+            border-top-right-radius: .5rem;
+            box-shadow: 1px -1px var(--bs-border-color);
+            transform: scale(.707) rotate(45deg);
+        }
+
+        .breadcrumb-custom .breadcrumb-item:first-child {
+            padding-left: 1.5rem;
+        }
+
+        .breadcrumb-custom .breadcrumb-item:last-child {
+            padding-right: 1.5rem;
+        }
+
+            .breadcrumb-custom .breadcrumb-item:last-child::after {
+                display: none;
+            }
+</style>
+
+<div class="container my-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #f8f9fa;">
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Index", "Home")">
+                    <i class="fa fa-house-user"></i>
+                    Resumen
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <i class="fa fa-users"></i>
+                Usuarios
+            </li>
+        </ol>
+    </nav>
+</div>
+<!-- fin -->
+
+<div class="card mb-4">
+    <div class="card-header text-bg-primary" style="background: #4e73df; user-select: none;">
+        <i class="fas fa-users me-1"></i>
+        Lista de Usuarios
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-sm btn-outline-success" onclick="btnabrirmodal(null)">
+                    Nuevo Usuario &nbsp; <i class="fas fa-user me-1"></i>
+                </button>
+            </div>
+        </div>
+        <hr />
+        <table id="tabla" class="display cell-border table table-striped py-2 rounded-3 table-bordered border-success" style="width: 100%;">
+            <thead class="text-center table-success" style="user-select: none;">
+                <tr>
+                    <th>Nombre Usuario</th>
+                    <th>Correo</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="abrirmodal" tabindex="-1" aria-labelledby="btnmodalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-bg-success rounded-2" id="btnmodalLabel">&nbsp; Crear Nuevo Usuario <i class="fas fa-users me-1"></i> &nbsp;</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="userid" type="text" value="0" />
+                <form class="row g-2" autocomplete="off">
+                    <div class="col-md-6">
+                        <label for="nombreuser" class="form-label">Nombre Usuario</label>
+                        <input type="text" class="form-control" id="nombreuser" placeholder="usuario" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="txtcorreo" class="form-label">Correo Electronico</label>
+                        <input type="email" class="form-control" id="txtcorreo" placeholder="user@gmail.pe" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="txtestado" class="form-label">Estado</label>
+                        <select class="form-select" id="txtestado" required>
+                            <option selected disabled value="">Elige un estado...</option>
+                            <option value="1">Activar Usuario 😀</option>
+                            <option value="0">Desactivar Usuario 😭</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                            <i class="fa fa-check-circle"></i> &nbsp; An example success alert with an icon
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-primary" type="button" onclick="guardar()">Registrar Usuario &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--fin modal-->
+
+@section scripts {
+    <!--sweetAlert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        var tabladata;
+        var filaseleccionada;
+
+        tabladata = $("#tabla").DataTable({
+            responsive: true,
+            ordering: false,
+            "ajax": {
+                url: '@Url.Action("ListarUsuarios", "Home")',
+                type: "GET",
+                dataType: "json"
+            },
+            "columns": [
+                { "data": "nombreusuario" },
+                { "data": "correo" },
+                {
+                    "data": "estado",
+                    "render": function (valor) {
+                        if (valor) {
+                            return '<span class="badge text-bg-success py-2" style="user-select: none;">Usuario Activo 😀</span>'
+                        } else {
+                            return '<span class="badge text-bg-danger py-2" style="user-select: none;">Usuario Inactivo 😔</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": '<button type="button" class="btn btn-outline-primary btn-sm btn-editar">Editar &nbsp; <i class="fas fa-pencil-alt"></i></button>' +
+                        '<button type="button" class="btn btn-outline-danger btn-sm ms-2 btn-eliminar">Eliminar &nbsp; <i class="fas fa-trash-alt"></i></button>',
+                    "orderable": false,
+                    "searchable": false
+                }
+            ],
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            }
+        });
+
+        //abrir modal
+        function btnabrirmodal(json) {
+        
+            $("#userid").val(0);
+            $("#nombreuser").val("");
+            $("#txtcorreo").val("");
+            $("#txtclave").val("");
+            $("#txtestado").val(1);
+
+            $("#mensajeError").hide();
+
+            if (json != null) {
+                $("#userid").val(json.idusuario);
+                $("#nombreuser").val(json.nombreusuario);
+                $("#txtcorreo").val(json.correo);
+                $("#txtclave").val(json.clave);
+                $("#txtestado").val(json.estado == true ? 1 : 0);
+            }
+            $("#abrirmodal").modal("show");
+        }
+        /*
+            * opcion editar
+            * seleccionamos la seccion tr
+        */
+        $("#tabla tbody").on("click", '.btn-editar', function () {
+            filaseleccionada = $(this).closest("tr");
+            var data = tabladata.row(filaseleccionada).data();
+            btnabrirmodal(data)
+        })
+
+        //btn guardar
+        function guardar() {
+            var Usuario = {
+                idusuario: $("#userid").val(),
+                estado: $("#txtestado").val() == 1 ? true: false,
+                nombreusuario: $("#nombreuser").val(),
+                correo: $("#txtcorreo").val(),
+                clave: $("#txtclave").val()
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarUsuarios", "Home")',
+                type: "POST",
+                data: JSON.stringify({ objeto: Usuario }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    debugger;
+                    //usuario nuevo
+                    if (Usuario.idusuario == 0) {
+                        if (data.resultado != 0) {
+                            Usuario.idusuario = data.resultado;
+                            tabladata.row.add(Usuario).draw(false);
+                            $("#abrirmodal").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                      
+                    } else {
+                        if (data.resultado) {
+                            tabladata.row(filaseleccionada).data(Usuario).draw(false);
+                            filaseleccionada = null;
+                            $("#abrirmodal").modal("hide");
+                        } else {
+                            $("#mensajeError").text(data.mensaje);
+                            $("#mensajeError").show();
+                        }
+                        
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+                beforeSend: function () {
+
+                },
+            });
+
+            //$("#abrirmodal").modal("hide");
+
+        }
+    </script>
+}
