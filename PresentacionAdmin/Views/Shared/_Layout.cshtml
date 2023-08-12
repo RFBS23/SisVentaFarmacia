@@ -5,32 +5,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Sistema Farmacia</title>
-    <link rel="shortcut icon" href="~/images/icono.png">
+    <link rel="shortcut icon" href="~/assets/images/icono.png">
     @Styles.Render("~/Content/css")
     @*Scripts.Render("~/bundles/modernizr")*@
 </head>
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-light" style="background: #b6b6b6;">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">
+        <a class="navbar-brand ps-3 sidebar-divider" href="index.html">
             <!--FAMISALUD-->
             <img class="img-logo" src="~/images/logo.png" style="width: 140px;">
         </a>
 
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-            </div>
-        </form>-->
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown text-bg-success rounded-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-light small">Douglas McGee</span>
+                    <span class="mr-2 d-none d-lg-inline small" style="color: #ebe1c9;">Douglas McGee</span>
                     <i class="fas fa-user fa-fw"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -70,36 +63,45 @@
 
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <nav class="sb-sidenav accordion sb-sidenav-dark text-primary" id="sidenavAccordion" style="background: #4e73df">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading">Resumen</div>
-                        <a class="nav-link" href="@Url.Action("Index", "Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Dashboard
+                        <div class="sb-sidenav-menu-heading text-light">Inicio</div>
+                        <a class="nav-link collapse active" href="@Url.Action("Index", "Home")">
+                            <!--<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>-->
+                            🏡
+                            Inicio
                         </a>
+
+                        <div class="sb-sidenav-menu-heading text-light">Resumen</div>
                         <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>
+                            <!--<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>-->
+                            🙋
                             Usuarios
                         </a>
-                        
-                        <div class="sb-sidenav-menu-heading">Mantenimientos</div>
+
+                        <a class="sb-sidenav-menu-heading text-light text-decoration-none"  href="@Url.Action("Mantenimientos", "Mantenimiento")">
+                                🛠️ Mantenimientos
+                        </a>
                         <a class="nav-link" href="@Url.Action("Categorias", "Mantenimiento")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-grip-horizontal"></i></div>
+                            <!--<div class="sb-nav-link-icon"><i class="fas fa-grip-horizontal"></i></div>-->
+                            🔠
                             Categorias
                         </a>
                         <a class="nav-link" href="@Url.Action("Marcas", "Mantenimiento")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
+                            <!--<div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>-->
+                            🏷️
                             Marcas
                         </a>
                         <a class="nav-link" href="@Url.Action("Productos", "Mantenimiento")">
-                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+                            <!--<div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>-->
+                            📦
                             Productos
                         </a>
                     </div>
                 </div>
 
-                <div class="sb-sidenav-footer">
+                <div class="sb-sidenav-footer text-light">
                     <div class="small">Conectado como:</div>
                     Start Bootstrap
                 </div>
