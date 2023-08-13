@@ -64,9 +64,9 @@
             }
 </style>
 
-<div class="container my-3 py-3">
+<div class="container my-3 py-3" style="user-select: none;">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3 shadow-lg" style="background: #f8f9fa;">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #d7dee5;">
             <li class="breadcrumb-item">
                 <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Index", "Home")">
                     🏠
@@ -82,7 +82,7 @@
 </div>
 <!-- fin -->
 
-<main>
+<main style="user-select: none;">
     <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
         <div class="col">
             <div class="card mb-4 rounded-3 shadow-sm border-success">
@@ -90,6 +90,7 @@
                     <h4 class="my-0 fw-normal">Categorias</h4>
                 </div>
                 <div class="card-body">
+                    <img src="~/assets/mantenimientos/categorias.png" class="img-thumbnail" alt="img-categoria" style="width: 10rem; border: none;">
                     <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>10 users included</li>
@@ -97,7 +98,7 @@
                         <li>Email support</li>
                         <li>Help center access</li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-outline-success">Ir a Categoria 🔗</button>
+                    <a class="w-100 btn btn-outline-success" href="@Url.Action("Categorias", "Mantenimiento")">Ir a Categoria 🔗</a>
                 </div>
             </div>
         </div>
@@ -107,6 +108,7 @@
                     <h4 class="my-0 fw-normal">Marcas</h4>
                 </div>
                 <div class="card-body">
+                    <img src="~/assets/mantenimientos/marcas.png" class="img-thumbnail" alt="img-marcas" style="width: 10rem; border: none;">
                     <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>20 users included</li>
@@ -114,7 +116,7 @@
                         <li>Priority email support</li>
                         <li>Help center access</li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-outline-warning">Ir a Marcas 🔗</button>
+                    <a class="w-100 btn btn-outline-warning" href="@Url.Action("Marcas", "Mantenimiento")">Ir a Marcas 🔗</a>
                 </div>
             </div>
         </div>
@@ -124,6 +126,7 @@
                     <h4 class="my-0 fw-normal">Productos</h4>
                 </div>
                 <div class="card-body">
+                    <img src="~/assets/mantenimientos/productos.png" class="img-thumbnail" alt="img-productos" style="width: 10rem; border: none;">
                     <h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/mo</small></h1>
                     <ul class="list-unstyled mt-3 mb-4">
                         <li>30 users included</li>
@@ -131,7 +134,7 @@
                         <li>Phone and email support</li>
                         <li>Help center access</li>
                     </ul>
-                    <button type="button" class="w-100 btn btn-outline-primary">Ir a Productos 🔗</button>
+                    <a class="w-100 btn btn-outline-primary" href="@Url.Action("Productos", "Mantenimiento")">Ir a Productos 🔗</a>
                 </div>
             </div>
         </div>

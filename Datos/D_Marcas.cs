@@ -7,23 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Entidad;
-using System.Data.SqlClient;
-using System.Data;
-
 namespace Datos
 {
-    public class D_Categorias
+    public class D_Marcas
     {
-        public List<Categoria> Listar()
+        public List<Marca> Listar()
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<Marca> lista = new List<Marca>();
 
             try
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cndb))
                 {
-                    string query = "select idcategoria, descripcion, estado from categorias";
+                    string query = "select idmarca, descripcion, estado from marcas";
                     SqlCommand cmd = new SqlCommand(query, oconexion);
                     cmd.CommandType = CommandType.Text;
                     oconexion.Open();
@@ -32,9 +28,9 @@ namespace Datos
                     {
                         while (dr.Read())
                         {
-                            lista.Add(new Categoria()
+                            lista.Add(new Marca()
                             {
-                                idcategoria = Convert.ToInt32(dr["idcategoria"]),
+                                idmarca = Convert.ToInt32(dr["idmarca"]),
                                 descripcion = dr["descripcion"].ToString(),
                                 estado = Convert.ToBoolean(dr["estado"])
                             });
@@ -44,14 +40,14 @@ namespace Datos
             }
             catch
             {
-                lista = new List<Categoria>();
+                lista = new List<Marca>();
             }
 
             return lista;
         }
 
         //registrar
-        public int Registrar(Categoria obj, out string Mensaje)
+        public int Registrar(Marca obj, out string Mensaje)
         {
             int idautogenerado = 0;
             Mensaje = string.Empty;
@@ -59,7 +55,7 @@ namespace Datos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cndb))
                 {
-                    SqlCommand cmd = new SqlCommand("spu_registrarcategoria_categoria", oconexion);
+                    SqlCommand cmd = new SqlCommand("spu_registrarmarca_marca", oconexion);
                     cmd.Parameters.AddWithValue("descripcion", obj.descripcion);
                     cmd.Parameters.AddWithValue("estado", obj.estado);
                     cmd.Parameters.Add("resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -81,7 +77,7 @@ namespace Datos
         }
 
         //editar
-        public bool Editar(Categoria obj, out string Mensaje)
+        public bool Editar(Marca obj, out string Mensaje)
         {
             bool resultado = false;
             Mensaje = string.Empty;
@@ -89,8 +85,8 @@ namespace Datos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cndb))
                 {
-                    SqlCommand cmd = new SqlCommand("spu_editarcategoria_categoria", oconexion);
-                    cmd.Parameters.AddWithValue("idcategoria", obj.idcategoria);
+                    SqlCommand cmd = new SqlCommand("spu_editarmarca_marca", oconexion);
+                    cmd.Parameters.AddWithValue("idmarca", obj.idmarca);
                     cmd.Parameters.AddWithValue("descripcion", obj.descripcion);
                     cmd.Parameters.AddWithValue("estado", obj.estado);
                     cmd.Parameters.Add("resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
@@ -119,8 +115,8 @@ namespace Datos
             {
                 using (SqlConnection oconexion = new SqlConnection(Conexion.cndb))
                 {
-                    SqlCommand cmd = new SqlCommand("spu_eliminarcategoria_categoria", oconexion);
-                    cmd.Parameters.AddWithValue("idcategoria", id);
+                    SqlCommand cmd = new SqlCommand("spu_eliminarmarca", oconexion);
+                    cmd.Parameters.AddWithValue("idmarca", id);
                     cmd.Parameters.Add("resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     cmd.Parameters.Add("mensaje", SqlDbType.VarChar, 60).Direction = ParameterDirection.Output;
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -137,5 +133,6 @@ namespace Datos
             }
             return resultado;
         }
+
     }
 }

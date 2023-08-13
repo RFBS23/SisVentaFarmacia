@@ -66,7 +66,7 @@
 
 <div class="container my-3">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3 shadow-lg" style="background: #f8f9fa;">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #d7dee5; user-select: none;">
             <li class="breadcrumb-item">
                 <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Index", "Home")">
                     🏠
@@ -89,24 +89,24 @@
 <!-- fin -->
 
 <div class="card mb-4 shadow">
-    <div class="card-header text-bg-primary" style="background: #4e73df; user-select: none;">
-        <i class="fas fa-tools me-1"></i>
+    <div class="card-header text-bg-info bg-info" style="background: #4e73df; user-select: none;">
+        <i class="fas fa-table me-1"></i>
         Lista de Categorias
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-12">
-                <button type="button" class="btn btn-sm btn-outline-success" onclick="btnabrirmodal(null)">
-                    Nueva Categoria &nbsp; 🔠
+                <button type="button" class="btn btn-sm btn-outline-info" onclick="btnabrirmodal(null)">
+                    Nueva Categoria &nbsp; <i class="fas fa-table me-1"></i>
                 </button>
             </div>
         </div>
         <hr />
-        <table id="tabla" class="display cell-border table table-striped py-2 rounded-3 table-bordered border-success" style="width: 100%;">
-            <thead class="text-center table-success" style="user-select: none;">
+        <table id="tabla" class="display cell-border table table-striped py-2 rounded-3 table-bordered border-info" style="width: 100%; user-select: none;">
+            <thead class="text-center table-info" style="user-select: none;">
                 <tr>
-                    <th>Descripcion</th>
-                    <th>Estado</th>
+                    <th>Descripcion de Categoria</th>
+                    <th>Estado de Categoria</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -121,11 +121,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-bg-success rounded-2" id="btnmodalLabel">&nbsp; Categorias <i class="fas fa-tools me-1"></i> &nbsp;</h1>
+                <h1 class="modal-title fs-5 text-bg-info rounded-2" id="btnmodalLabel">&nbsp; Categorias <i class="fas fa-table me-1"></i> &nbsp;</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input id="userid" type="hidden" value="0" />
+                <input id="catid" type="hidden" value="0" />
                 <form class="row g-1" autocomplete="off">
                     <div class="col-md-6">
                         <label for="txtdescripcion" class="form-label">Descripcion</label>
@@ -152,7 +152,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-primary" type="button" onclick="guardar()">Guardar Categorias &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
+                <button class="btn btn-info" type="button" onclick="guardar()">Guardar Categorias &nbsp; <i class="fas fa-table me-1"></i> </button>
             </div>
         </div>
     </div>
@@ -168,20 +168,19 @@
             responsive: true,
             ordering: false,
             "ajax": {
-                url: '@Url.Action("ListarUsuarios", "Home")',
+                url: '@Url.Action("ListarCategorias", "Mantenimiento")',
                 type: "GET",
                 dataType: "json"
             },
             "columns": [
-                { "data": "nombreusuario" },
-                { "data": "correo" },
+                { "data": "descripcion" },
                 {
                     "data": "estado",
                     "render": function (valor) {
                         if (valor) {
-                            return '<span class="badge text-bg-success py-2" style="user-select: none;">Usuario Activo 😀</span>'
+                            return '<span class="badge text-bg-success py-2" style="user-select: none;">Categoria Activada 😀</span>'
                         } else {
-                            return '<span class="badge text-bg-danger py-2" style="user-select: none;">Usuario Inactivo 😔</span>'
+                            return '<span class="badge text-bg-danger py-2" style="user-select: none;">Categoria Desactivada 😔</span>'
                         }
                     }
                 },
@@ -200,19 +199,15 @@
         //abrir modal
         function btnabrirmodal(json) {
 
-            $("#userid").val(0);
-            $("#nombreuser").val("");
-            $("#txtcorreo").val("");
-            $("#txtclave").val("");
+            $("#catid").val(0);
+            $("#txtdescripcion").val("");
             $("#txtestado").val(1);
 
             $("#mensajeError").hide();
 
             if (json != null) {
-                $("#userid").val(json.idusuario);
-                $("#nombreuser").val(json.nombreusuario);
-                $("#txtcorreo").val(json.correo);
-                $("#txtclave").val(json.clave);
+                $("#catid").val(json.idcategoria);
+                $("#txtdescripcion").val(json.descripcion);
                 $("#txtestado").val(json.estado == true ? 1 : 0);
             }
             $("#abrirmodal").modal("show");
@@ -229,30 +224,30 @@
 
         //eliminar
         $("#tabla tbody").on("click", '.btn-eliminar', function () {
-            var usuarioseleccionado = $(this).closest("tr");
-            var data = tabladata.row(usuarioseleccionado).data();
+            var categoriaseleccionada = $(this).closest("tr");
+            var data = tabladata.row(categoriaseleccionada).data();
 
             swal({
                 title: "¿Estas Seguro(a)?",
-                text: "Desea Eliminar el Usuario 🤔?",
+                text: "Desea Eliminar La Categoria 🤔?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: "btn-danger",
-                confirmButtonText: "Si, Deseo Eliminar 👨‍💻",
+                confirmButtonText: "Si, Deseo Eliminar 🔠",
                 cancelButtonText: "No, Cancelar 😅!",
                 closeOnConfirm: false
             },
                 function () {
                     jQuery.ajax({
-                        url: '@Url.Action("EliminarUsuarios", "Home")',
+                        url: '@Url.Action("EliminarCategorias", "Mantenimiento")',
                         type: "POST",
-                        data: JSON.stringify({ id: data.idusuario }),
+                        data: JSON.stringify({ id: data.idcategoria }),
                         dataType: "json",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             if (data.resultado) {
-                                tabladata.row(usuarioseleccionado).remove().draw();
-                                swal("Eliminado!!", "El Usuario Fue Eliminado Correctamente", "success");
+                                tabladata.row(categoriaseleccionada).remove().draw();
+                                swal("Eliminado!!", "La Categoria Fue Eliminada Correctamente", "success");
                             } else {
                                 swal("Cancelado", "Se ha cancelado la Operacion", "error");
                             }
@@ -268,36 +263,34 @@
 
         //btn guardar
         function guardar() {
-            var Usuario = {
-                idusuario: $("#userid").val(),
-                estado: $("#txtestado").val() == 1 ? true: false,
-                nombreusuario: $("#nombreuser").val(),
-                correo: $("#txtcorreo").val(),
-                clave: $("#txtclave").val()
+            var Categoria = {
+                idcategoria: $("#catid").val(),
+                descripcion: $("#txtdescripcion").val(),
+                estado: $("#txtestado").val() == 1 ? true: false
             }
 
             jQuery.ajax({
-                url: '@Url.Action("GuardarUsuarios", "Home")',
+                url: '@Url.Action("GuardarCategorias", "Mantenimiento")',
                 type: "POST",
-                data: JSON.stringify({ objeto: Usuario }),
+                data: JSON.stringify({ objeto: Categoria }),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     $(".modal-body").LoadingOverlay("hide");
-                    //usuario nuevo
-                    if (Usuario.idusuario == 0) {
+                    //categoria nueva
+                    if (Categoria.idcategoria == 0) {
                         if (data.resultado != 0) {
-                            Usuario.idusuario = data.resultado;
-                            tabladata.row.add(Usuario).draw(false);
+                            Categoria.idcategoria = data.resultado;
+                            tabladata.row.add(Categoria).draw(false);
                             $("#abrirmodal").modal("hide");
                         } else {
                             $("#mensajeError").text(data.mensaje);
                             $("#mensajeError").show();
                         }
 
-                    } else {
+                    } else { //editar categoria
                         if (data.resultado) {
-                            tabladata.row(filaseleccionada).data(Usuario).draw(false);
+                            tabladata.row(filaseleccionada).data(Categoria).draw(false);
                             filaseleccionada = null;
                             $("#abrirmodal").modal("hide");
                         } else {

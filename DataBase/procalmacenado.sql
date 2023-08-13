@@ -114,3 +114,148 @@ end
 go
 
 select * from categorias;
+
+-- marcas
+create proc spu_registrarmarca_marca(
+	@descripcion varchar(100),
+	@estado bit,
+	@mensaje varchar(60) output,
+	@resultado int output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from marcas where descripcion = @descripcion)
+	begin
+		insert into marcas (descripcion, estado) values (@descripcion, @estado)
+		set @resultado = SCOPE_IDENTITY()
+	end
+	else
+	set @mensaje = 'La marca ya existe'
+end
+go
+
+create proc spu_editarmarca_marca(
+	@idmarca int,
+	@descripcion varchar(100),
+	@estado bit,
+	@mensaje varchar(60) output,
+	@resultado bit output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from marcas where descripcion = @descripcion and idmarca != @idmarca)
+	begin
+		update top (1) marcas set
+		descripcion = @descripcion,
+		estado = @estado
+		where idmarca = @idmarca
+		set @resultado = 1
+	end
+	else
+		set @mensaje = 'La marca ya existe'
+end
+go
+
+create proc spu_eliminarmarca(
+	@idmarca int,
+	@mensaje varchar(60) output,
+	@resultado bit output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from productos p inner join marcas m on m.idmarca = p.idmarca where p.idmarca = @idmarca)
+	begin
+		delete top(1) from marcas where idmarca = @idmarca
+		set @resultado = 1
+	end
+	else
+	set @mensaje = 'La marca esta realciona con un producto'
+end
+go
+
+select * from marcas
+go
+
+-- productos
+create proc spu_registrar_productos(
+	@idmarca varchar(100),
+	@idcategoria varchar(100),
+	@nombre varchar(100),
+	@Descripcion varchar(500),	
+	@precio decimal(10,2),
+	@stock int,
+	@estado bit,
+	@mensaje varchar(60) output,
+	@resultado int output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from productos where nombre = @nombre)
+	begin
+		insert into productos(idmarca, idcategoria, nombre, Descripcion, precio, stock, estado) values
+		(@idmarca, @idcategoria, @nombre, @Descripcion, @precio, @stock, @estado)
+		set @resultado = SCOPE_IDENTITY()
+	end
+	else
+	set @mensaje = 'El producto ya existe'
+end
+go
+
+create proc spu_editar_productos(
+	@idproducto int,
+	@idmarca varchar(100),
+	@idcategoria varchar(100),
+	@nombre varchar(100),
+	@Descripcion varchar(500),	
+	@precio decimal(10,2),
+	@stock int,
+	@estado bit,
+	@mensaje varchar(60) output,
+	@resultado int output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from productos where nombre = @nombre and idproducto != @idproducto)
+	begin
+		update productos set
+		idmarca = @idmarca,
+		idcategoria = @idcategoria,
+		nombre = @nombre,
+		Descripcion = @Descripcion,
+		precio = @precio,
+		stock = @stock,
+		estado = @estado
+		where idproducto = @idproducto
+		set @resultado = 1
+	end
+	else
+	set @mensaje = 'El producto ya existe'
+end
+go
+
+create proc spu_eliminar_producto(
+	@idproducto int,
+	@mensaje varchar(60) output,
+	@resultado bit output
+)
+as
+begin
+	set @resultado = 0
+	if not exists (select * from detallesVentas dv inner join productos p on p.idproducto = dv.idproducto where p.idproducto = @idproducto)
+	begin
+		delete top (1) from productos where idproducto = @idproducto
+		set @resultado = 1
+	end
+	else
+	set @mensaje = 'El producto se encuentra relacionado a una venta'
+end
+go
+
+select p.idproducto, p.nombre, p.Descripcion, m.idmarca, m.descripcion[desmarca], c.idcategoria, c.descripcion[descategoria], p.precio, p.stock, p.rutaimg, p.nombreimg, p.estado from productos p
+inner join marcas m on m.idmarca = p.idmarca
+inner join categorias c on c.idcategoria = p.idcategoria

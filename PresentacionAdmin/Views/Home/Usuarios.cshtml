@@ -66,11 +66,11 @@
 
 <div class="container my-3">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3 shadow-lg" style="background: #f8f9fa;">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #d7dee5; user-select: none;">
             <li class="breadcrumb-item">
                 <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Index", "Home")">
                     🏠
-                    Resumen
+                    Inicio
                 </a>
             </li>
             <li class="breadcrumb-item">
@@ -83,7 +83,7 @@
 <!-- fin -->
 
 <div class="card mb-4 shadow">
-    <div class="card-header text-bg-primary" style="background: #4e73df; user-select: none;">
+    <div class="card-header text-bg-success" style="background: #4e73df; user-select: none;">
         <i class="fas fa-users me-1"></i>
         Lista de Usuarios
     </div>
@@ -96,7 +96,7 @@
             </div>
         </div>
         <hr />
-        <table id="tabla" class="display cell-border table table-striped py-2 rounded-3 table-bordered border-success" style="width: 100%;">
+        <table id="tabla" class="display cell-border table table-striped py-2 rounded-3 table-bordered border-success" style="width: 100%; user-select: none;">
             <thead class="text-center table-success" style="user-select: none;">
                 <tr>
                     <th>Nombre Usuario</th>
@@ -150,7 +150,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-primary" type="button" onclick="guardar()">Guardar Datos &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
+                <button class="btn btn-success" type="button" onclick="guardar()">Guardar Datos &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
             </div>
         </div>
     </div>
@@ -238,7 +238,7 @@
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Si, Deseo Eliminar 👨‍💻",
                 cancelButtonText: "No, Cancelar 😅!",
-                closeOnConfirm: false
+                closeOnConfirm: false,
             },
                 function () {
                     jQuery.ajax({
