@@ -119,25 +119,25 @@
 <!-- Modal -->
 <div class="modal fade" id="abrirmodal" tabindex="-1" aria-labelledby="btnmodalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content border-info">
+            <div class="modal-header border-info">
                 <h1 class="modal-title fs-5 text-bg-info rounded-2" id="btnmodalLabel">&nbsp; Categorias <i class="fas fa-table me-1"></i> &nbsp;</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close bg-info" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input id="catid" type="hidden" value="0" />
                 <form class="row g-1" autocomplete="off">
-                    <div class="col-md-6">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txtdescripcion" placeholder="agrega una descripcion" required>
                         <label for="txtdescripcion" class="form-label">Descripcion</label>
-                        <input type="email" class="form-control" id="txtdescripcion" placeholder="agrega una descripcion" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="txtestado" class="form-label">Estado</label>
+                    <div class="form-floating mb-3">
                         <select class="form-select" id="txtestado" required>
                             <option selected disabled value="">Elige un estado...</option>
                             <option value="1">Activar Categoria 😀</option>
                             <option value="0">Desactivar Categoria 😭</option>
                         </select>
+                        <label for="txtestado" class="form-label">Estado</label>                        
                     </div>
                 </form>
 
@@ -151,7 +151,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button class="btn btn-info" type="button" onclick="guardar()">Guardar Categorias &nbsp; <i class="fas fa-table me-1"></i> </button>
             </div>
         </div>

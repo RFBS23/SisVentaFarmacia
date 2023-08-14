@@ -54,6 +54,8 @@ create table productos(
 )
 go
 
+select * from productos
+
 create table clientes(
 	idcliente int identity primary key,
 	nombres varchar(50),

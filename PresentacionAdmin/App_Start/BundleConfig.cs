@@ -17,6 +17,7 @@ namespace PresentacionAdmin
                 "~/Scripts/DataTables/jquery.dataTables.js",
                 "~/Scripts/DataTables/dataTables.responsive.js",
                 "~/Scripts/sweetalert.min.js",
+                "~/Scripts/jquery.validate.js",
                 "~/Scripts/scripts.js"
                 ));
 

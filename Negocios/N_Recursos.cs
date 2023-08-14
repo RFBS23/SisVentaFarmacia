@@ -36,6 +36,7 @@ namespace Negocios
             return sb.ToString();
         }
 
+        //enviar email
         public static bool EnviarEmail(string correo, string asunto, string mensaje)
         {
             bool resultado = false;
@@ -63,6 +64,22 @@ namespace Negocios
                 resultado = false;
             }
             return resultado;
+        }
+
+        //imagenes
+        public static string ConvertirBase64(string ruta, out bool conversion)
+        {
+            string textoBase64 = string.Empty;
+            conversion = true;
+            try
+            {
+                byte[] bytes = File.ReadAllBytes(ruta);
+                textoBase64 = Convert.ToBase64String(bytes);
+            } catch
+            {
+                conversion = false;
+            }
+            return textoBase64;
         }
 
     }

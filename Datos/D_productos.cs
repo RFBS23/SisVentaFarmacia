@@ -143,10 +143,10 @@ namespace Datos
                 {
                     string query = "update productos set rutaimg = @rutaimg, nombreimg = @nombreimg where idproducto = @idproducto";
 
-                    SqlCommand cmd = new SqlCommand("spu_registrar_productos", oconexion);
-                    cmd.Parameters.AddWithValue("rutaimg", obj.rutaimg);
-                    cmd.Parameters.AddWithValue("nombreimg", obj.nombreimg);
-                    cmd.Parameters.AddWithValue("idproducto", obj.idproducto);
+                    SqlCommand cmd = new SqlCommand(query, oconexion);
+                    cmd.Parameters.AddWithValue("@rutaimg", obj.rutaimg);
+                    cmd.Parameters.AddWithValue("@nombreimg", obj.nombreimg);
+                    cmd.Parameters.AddWithValue("@idproducto", obj.idproducto);
                     cmd.CommandType = CommandType.Text;
 
                     oconexion.Open();

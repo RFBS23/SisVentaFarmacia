@@ -114,29 +114,29 @@
 <!-- Modal -->
 <div class="modal fade" id="abrirmodal" tabindex="-1" aria-labelledby="btnmodalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content border-success">
+            <div class="modal-header border-success">
                 <h1 class="modal-title fs-5 text-bg-success rounded-2" id="btnmodalLabel">&nbsp; Usuarios <i class="fas fa-users me-1"></i> &nbsp;</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close bg-success" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input id="userid" type="hidden" value="0" />
                 <form class="row g-2" autocomplete="off">
-                    <div class="col-md-6">
-                        <label for="nombreuser" class="form-label">Nombre Usuario</label>
+                    <div class="form-floating mb-3 col-md-6">
                         <input type="text" class="form-control" id="nombreuser" placeholder="usuario" required>
+                        <label for="nombreuser" class="form-label">Nombre Usuario</label>
                     </div>
-                    <div class="col-md-6">
-                        <label for="txtcorreo" class="form-label">Correo Electronico</label>
+                    <div class="form-floating mb-3 col-md-6">
                         <input type="email" class="form-control" id="txtcorreo" placeholder="user@gmail.pe" required>
+                        <label for="txtcorreo" class="form-label">Correo Electronico</label>                        
                     </div>
-                    <div class="col-md-6">
-                        <label for="txtestado" class="form-label">Estado</label>
+                    <div class="form-floating col-md-6">
                         <select class="form-select" id="txtestado" required>
                             <option selected disabled value="">Elige un estado...</option>
                             <option value="1">Activar Usuario 😀</option>
                             <option value="0">Desactivar Usuario 😭</option>
                         </select>
+                        <label for="txtestado" class="form-label">Estado</label>
                     </div>
                 </form>
 
@@ -149,7 +149,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button class="btn btn-success" type="button" onclick="guardar()">Guardar Datos &nbsp; <i class="fas fa-user-plus me-1"></i> </button>
             </div>
         </div>
