@@ -2,32 +2,156 @@
     ViewBag.Title = "Inicio";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<div class="container my-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #d7dee5; user-select: none;">
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Dashboard", "Home")">
+                    📊
+                    Dashboard
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                🏠
+                Inicio
+            </li>
+        </ol>
+    </nav>
+</div>
+<!-- fin -->
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting startxded</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9" style="user-select: none;">
+                        <h6>Cantidad de Clientes</h6>
+                        <h6 id="totalcliente">0</h6>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9" style="user-select: none;">
+                        <h6>Cantidad de Ventas</h6>
+                        <h6 id="totalventa">0</h6>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-shopping-bag fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9" style="user-select: none;">
+                        <h6>Cantidad de Productos</h6>
+                        <h6 id="totalproducto">0</h6>
+                    </div>
+                    <div class="col-sm-3">
+                        <i class="fas fa-boxes fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header" style="user-select: none;">
+        <i class="fas fa-tags me-1"></i>
+        Historial de Ventas
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="row" style="align-items: center;">
+                <div class="col-sm-2">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border-success" id="txtfechainicio" name="fechainicio" placeholder="fecha de inicio">
+                        <label for="floatingInput">Fecha de Inicio</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border-success" id="txtfechafin" name="fechafin" placeholder="fecha de inicio">
+                        <label for="floatingInput">Fecha de Fin</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border-success" id="txtidtransaccion" name="idtransaccion" placeholder="fecha de inicio">
+                        <label for="floatingInput">Transacción</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-outline-primary" id="btnbuscar" type="button">Buscar &nbsp; <i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-outline-danger" id="btnpdf" type="submit">Exportar &nbsp; <i class="fas fa-file-pdf"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <hr />
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="tabla" class="display cell-border" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Fecha de Venta</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>ID Transaccion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $("#txtfechainicio").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+        $("#txtfechafin").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+
+        jQuery.ajax({
+            url: '@Url.Action("vistaReportes", "Home")',
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var objeto = data.resultado;
+                $("#totalcliente").text(objeto.TotalCliente)
+                $("#totalventa").text(objeto.TotalVenta)
+                $("#totalproducto").text(objeto.TotalProducto)
+            }
+         });
+    </script>
+}

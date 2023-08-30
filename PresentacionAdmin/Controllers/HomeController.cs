@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 //referencias
 using Entidad;
@@ -13,6 +14,11 @@ namespace PresentacionAdmin.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        
         public ActionResult Index()
         {
             return View();
@@ -58,5 +64,19 @@ namespace PresentacionAdmin.Controllers
             return Json(new { resultado = respuesta, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult vistaReportes()
+        {
+            Reportes objeto = new N_Reportes().verReportes();
+            return Json(new { resultado = objeto }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult listaReportes(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<ReportesVenta> oLista = new List<ReportesVenta>();
+            oLista = new N_Reportes().Ventas(fechainicio, fechafin, idtransaccion);
+            return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

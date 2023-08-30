@@ -118,6 +118,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -125,6 +126,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\inicio\casa.png" />
+    <Content Include="assets\inicio\usuarios.png" />
+    <Content Include="assets\login\fondo.svg" />
+    <Content Include="assets\login\icono.png" />
     <Content Include="assets\mantenimientos\categorias.png" />
     <Content Include="assets\mantenimientos\marcas.png" />
     <Content Include="assets\mantenimientos\productos.png" />
@@ -148,6 +153,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
+    <Content Include="Content\breadcrumb.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -307,6 +313,15 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\solid.css" />
@@ -451,6 +466,7 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -495,6 +511,7 @@
     <Content Include="Views\Mantenimiento\Mantenimientos.cshtml" />
     <Content Include="Views\Mantenimiento\Categorias.cshtml" />
     <Content Include="Views\Mantenimiento\Productos.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

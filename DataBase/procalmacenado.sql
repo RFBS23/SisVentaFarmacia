@@ -259,3 +259,40 @@ go
 select p.idproducto, p.nombre, p.Descripcion, m.idmarca, m.descripcion[desmarca], c.idcategoria, c.descripcion[descategoria], p.precio, p.stock, p.rutaimg, p.nombreimg, p.estado from productos p
 inner join marcas m on m.idmarca = p.idmarca
 inner join categorias c on c.idcategoria = p.idcategoria
+
+-- obtener total de clientes y ventas y productos
+select * from clientes
+
+-- reportes
+create proc spu_reporte
+as
+begin
+	select
+		(select count(*) from clientes) [TotalCliente],
+		(select isnull(sum(cantidad), 0) from detallesVentas) [TotalVenta],
+		(select count(*) from productos) [TotalProducto]
+end
+go
+exec spu_reporte
+go
+
+-- reporte de venta
+create proc spu_reporteVentas(
+	@fechainicio varchar(10),
+	@fechafin varchar(10),
+	@idtransaccion varchar(50)
+)
+as
+begin
+	set dateformat dmy;
+
+	select convert(char(10),v.fechaventa,103)[FechaVenta], CONCAT(c.nombres, '', c.apellidos)[Clientes], p.nombre [Producto], p.precio, dv.cantidad, dv.total, v.idtransaccion
+	from detallesVentas dv
+	inner join productos p on p.idproducto = dv.idproducto
+	inner join ventas v on v.idventa = dv.idventa
+	inner join clientes c on c.idcliente = v.idcliente
+
+	where convert(date, v.fechaventa) between @fechainicio and @fechafin
+	and v.idtransaccion = iif(@idtransaccion = '', v.idtransaccion, @idtransaccion)
+end
+go

@@ -66,14 +66,14 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark text-primary" id="sidenavAccordion" style="background: #4e73df; user-select: none;">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <div class="sb-sidenav-menu-heading text-light">Inicio</div>
-                        <a class="nav-link collapse active" href="@Url.Action("Index", "Home")">
+                        <a class="sb-sidenav-menu-heading text-light text-decoration-none" href="@Url.Action("Dashboard", "Home")">
+                            📊 Dashboard
+                        </a>
+                        <a class="nav-link collapse" href="@Url.Action("Index", "Home")">
                             <!--<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>-->
                             🏡
                             Inicio
                         </a>
-
-                        <div class="sb-sidenav-menu-heading text-light">Resumen</div>
                         <a class="nav-link" href="@Url.Action("Usuarios", "Home")">
                             <!--<div class="sb-nav-link-icon"><i class="fas fa-user-friends"></i></div>-->
                             🙋

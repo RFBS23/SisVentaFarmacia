@@ -18,7 +18,7 @@ namespace PresentacionAdmin.Controllers
         {
             return View();
         }
-        // GET: Mantenimiento
+        
         public ActionResult Categorias()
         {
             return View();

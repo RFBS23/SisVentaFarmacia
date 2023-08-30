@@ -24,3 +24,39 @@ jQuery.ajax({
             });
 
 
+-- login --
+<body style="background-color: #CBE6FC;">
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+                <div class="col-md-8 col-lg-7 col-xl-6">
+                    <img src="~/assets/index/hotel.svg" class="img-fluid" alt="logo">
+                </div>
+                <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                    <div class="text-center">
+                        <img src="~/assets/index/icono.png" style="width: 185px;" alt="logo">
+                        <h4 class="mt-1 mb-5 pb-1">Inicia Sesion</h4>
+                    </div>
+                    <form method="" action="">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control rounded-3 " id="email" placeholder="name@example.com" autofocus autocomplete="off" style="background-color: #FCCBF6;" onkeypress="return Correos(event);" required>
+                            <label for="email">Correo Electronico</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control rounded-3" id="password" placeholder="Password" style="background-color: #CBFCDB;">
+                            <label for="password">contraseña</label>
+                        </div>
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" id="iniciar-sesion">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Sistema Hotel by Fabrizio Barrios Saavedra - RFBS23</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </section>
+</body>

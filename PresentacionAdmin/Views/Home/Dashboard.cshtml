@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-3 py-3" style="user-select: none;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3" style="background: #d7dee5;">
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis text-decoration-none text-dark" href="@Url.Action("Dashboard", "Home")">
+                    📊
+                    Dashboard
+                </a>
+            </li>
+        </ol>
+    </nav>
+</div>
+<!-- fin -->
+
+<main style="user-select: none;">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-secondary">
+                <div class="card-header py-3 text-bg-secondary border-secondary">
+                    <h4 class="my-0 fw-normal">Inicio</h4>
+                </div>
+                <div class="card-body">
+                    <img src="~/assets/inicio/casa.png" class="img-thumbnail" alt="img-casa" style="width: 10rem; border: none;">
+                    <h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>20 users included</li>
+                        <li>10 GB of storage</li>
+                        <li>Priority email support</li>
+                        <li>Help center access</li>
+                    </ul>
+                    <a class="w-100 btn btn-outline-secondary" href="@Url.Action("Dashboard", "Home")">Ir a Incio 🔗</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-success">
+                <div class="card-header py-3 text-bg-success border-success">
+                    <h4 class="my-0 fw-normal">Usuarios</h4>
+                </div>
+                <div class="card-body">
+                    <img src="~/assets/inicio/usuarios.png" class="img-thumbnail" alt="img-usuarios" style="width: 10rem; border: none;">
+                    <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>10 users included</li>
+                        <li>2 GB of storage</li>
+                        <li>Email support</li>
+                        <li>Help center access</li>
+                    </ul>
+                    <a class="w-100 btn btn-outline-success" href="@Url.Action("Usuarios", "Home")">Ir a Usuarios 🔗</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
