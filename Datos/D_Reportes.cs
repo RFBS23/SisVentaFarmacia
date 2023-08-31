@@ -39,7 +39,7 @@ namespace Datos
                                 precio = Convert.ToDecimal( dr["precio"], new CultureInfo("es-PE")),
                                 cantidad = Convert.ToInt32(dr["cantidad"].ToString()),
                                 total = Convert.ToDecimal(dr["total"], new CultureInfo("es-PE")),
-                                idtransaccion = dr["estado"].ToString()
+                                idtransaccion = dr["idtransaccion"].ToString()
                             });
                         }
                     }

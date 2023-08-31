@@ -7,10 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Entidad;
-using System.Data.SqlClient;
-using System.Data;
-
 namespace Datos
 {
     public class D_Categorias

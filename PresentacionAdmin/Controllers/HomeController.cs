@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Services.Description;
+using ClosedXML.Excel;
 
 //referencias
 using Entidad;
@@ -78,5 +81,48 @@ namespace PresentacionAdmin.Controllers
             oLista = new N_Reportes().Ventas(fechainicio, fechafin, idtransaccion);
             return Json(new { data = oLista }, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public FileResult ExportarVentaExcel(string fechainicio, string fechafin, string idtransaccion)
+        {
+            List<ReportesVenta> oLista = new List<ReportesVenta>();
+            oLista = new N_Reportes().Ventas(fechainicio, fechafin, idtransaccion);
+
+            DataTable dt = new DataTable();
+            dt.Locale = new System.Globalization.CultureInfo("es-PE");
+            dt.Columns.Add("FechaVenta", typeof(string));
+            dt.Columns.Add("Clientes", typeof(string));
+            dt.Columns.Add("Producto", typeof(string));
+            dt.Columns.Add("precio", typeof(decimal));
+            dt.Columns.Add("cantidad", typeof(int));
+            dt.Columns.Add("total", typeof(decimal));
+            dt.Columns.Add("idtransaccion", typeof(string));
+
+            foreach (ReportesVenta rv in oLista)
+            {
+                dt.Rows.Add(new object[]
+                {
+                    rv.FechaVenta,
+                    rv.Clientes,
+                    rv.Producto,
+                    rv.precio,
+                    rv.cantidad,
+                    rv.total,
+                    rv.idtransaccion
+                });
+            }
+
+            dt.TableName = "Datos";
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "ReporteVenta" + DateTime.Now.ToString() + ".xlsx");
+                }
+            }
+        }
+
     }
 }

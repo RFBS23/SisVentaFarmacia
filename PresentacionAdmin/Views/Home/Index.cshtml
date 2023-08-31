@@ -74,7 +74,7 @@
         Historial de Ventas
     </div>
     <div class="card-body">
-        <form>
+        <form action="@Url.Action("ExportarVentaExcel", "Home")" method="post">
             <div class="row" style="align-items: center;">
                 <div class="col-sm-2">
                     <div class="form-floating mb-3">
@@ -108,6 +108,11 @@
                         <button class="btn btn-outline-danger" id="btnpdf" type="submit">Exportar &nbsp; <i class="fas fa-file-pdf"></i></button>
                     </div>
                 </div>
+                <div class="col-sm-2">
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-outline-success" id="btnxlsx" type="submit">Exportar &nbsp; <i class="fas fa-file-excel"></i></button>
+                    </div>
+                </div>
             </div>
         </form>
 
@@ -138,20 +143,62 @@
 
 @section scripts {
     <script>
-        $("#txtfechainicio").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
-        $("#txtfechafin").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+        var tabladata;
 
-        jQuery.ajax({
-            url: '@Url.Action("vistaReportes", "Home")',
-            type: "GET",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var objeto = data.resultado;
-                $("#totalcliente").text(objeto.TotalCliente)
-                $("#totalventa").text(objeto.TotalVenta)
-                $("#totalproducto").text(objeto.TotalProducto)
-            }
-         });
+        $(document).ready(function () {
+            $("#txtfechainicio").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+            $("#txtfechafin").datepicker({ dateFormat: 'dd/mm/yy' }).datepicker('setDate', new Date())
+
+            jQuery.ajax({
+                url: '@Url.Action("vistaReportes", "Home")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var objeto = data.resultado;
+                    $("#totalcliente").text(objeto.TotalCliente)
+                    $("#totalventa").text(objeto.TotalVenta)
+                    $("#totalproducto").text(objeto.TotalProducto)
+                }
+            });
+
+            var Url = '@Url.Action("listaReportes", "Home")' + "?fechainicio=" + $("#txtfechainicio").val() + "&fechafin=" + $("#txtfechafin").val() + "&idtransaccion=" + $("#txtidtransaccion").val()
+
+            // datatables
+
+            tabladata = $("#tabla").DataTable({
+                responsive: true,
+                ordering: false,
+                "ajax": {
+                    url: Url,
+                    type: "GET",
+                    dataType: "json"
+                },
+                "columns": [
+                    { "data": "FechaVenta" },
+                    { "data": "Clientes" },
+                    { "data": "Producto" },
+                    { "data": "precio" },
+                    { "data": "cantidad" },
+                    { "data": "total" },
+                    { "data": "idtransaccion" },
+                ],
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+                }
+            });
+        });
+
+        //evento click de btn buscar
+        $("#btnbuscar").on("click", function () {
+            var nueva_url = '@Url.Action("listaReportes", "Home")' +
+                "?fechainicio=" + $("#txtfechainicio").val() +
+                "&fechafin=" + $("#txtfechafin").val() +
+                "&idtransaccion=" + $("#txtidtransaccion").val()
+
+            tabladata.ajax.url(nueva_url).load();
+        })
+
+
     </script>
 }

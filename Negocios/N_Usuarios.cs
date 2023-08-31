@@ -77,5 +77,41 @@ namespace Negocios
             return objDatos.Eliminar(id, out Mensaje);
         }
 
+        //cambiar y restablecer contraseña
+        public bool CambiarClave(int idusuario, string nuevaclave, out string Mensaje)
+        {
+            return objDatos.Cambiarclave(idusuario, nuevaclave,out Mensaje);
+        }
+
+        public bool RestablecerClave(int idusuario, string correo, out string Mensaje)
+        {
+            Mensaje = string.Empty;
+            string nuevaclave = N_Recursos.GenerarClave(); //clave generada
+            bool resultado = objDatos.RestablecerClave(idusuario, N_Recursos.ConvertitSha256(nuevaclave), out Mensaje);
+
+            if (resultado)
+            {
+                string asunto = "FarmaDev - Restablecer contraseña";
+                string mensajeEmail = "<h3>Su contraseña fue restablecida Correctamente</h3><br><p>Para Acceder al sistema Debe utilizar la siguiente contraseña 🔑: ! contraseña ¡ </p>";
+                mensajeEmail = mensajeEmail.Replace("! contraseña ¡", nuevaclave);
+                bool respuesta = N_Recursos.EnviarEmail(correo, asunto, mensajeEmail);
+
+                if (respuesta)
+                {
+                    return true;
+                }
+                else
+                {
+                    Mensaje = "No se puedo enviar el correo";
+                    return false;
+                }
+            }
+            else
+            {
+                Mensaje = "No se puedo restablecer la contraseña :( ";
+                return false;
+            }
+        }
+
     }
 }
